@@ -1,4 +1,4 @@
-package com.example.rapidokarma.ui.theme
+package com.example.rapidokarma.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -9,3 +9,6 @@ val Pink80 = Color(0xFFEFB8C8)
 val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
+val RapidoYellow = Color(0xFFFFD700)
+val RapidoBlack = Color(0xFF1A1A1A)
+val RapidoGray = Color(0xFFF5F5F5)
