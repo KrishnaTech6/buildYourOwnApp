@@ -1,3 +1,11 @@
+# Why this App?
+
+While ride-sharing platforms provide a way to rate drivers, the actual feedback often gets lost in aggregated ratings. Riders may want to share more meaningful input—especially when something goes notably wrong or right—but don't get a proper medium for it. At the same time, drivers rarely receive constructive feedback that could help them improve or feel motivated.
+
+This app aims to solve that gap by allowing riders to submit detailed, sentiment-tagged feedback for their drivers in a lightweight, offline-first experience. It helps capture feedback even in low-network conditions and can later sync with a backend (in future iterations). The design encourages honesty, empathy, and actionable input for driver performance and experience.
+
+---
+
 # Driver Feedback App
 
 A modern Android application that enables users to submit feedback for drivers in an offline-first design. Built to demonstrate clean architecture, modern Android tools, and robust offline persistence using Room.
