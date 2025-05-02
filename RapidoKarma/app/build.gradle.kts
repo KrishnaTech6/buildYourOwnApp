@@ -87,4 +87,13 @@ dependencies {
 
     // App Startup
     implementation(libs.androidx.startup.runtime)
+
+    // coil
+    implementation("io.coil-kt.coil3:coil-compose:3.1.0")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
+
+    implementation( libs.androidx.material.icons.extended)
+
+    implementation ("com.google.accompanist:accompanist-flowlayout:0.25.1")
+
 }

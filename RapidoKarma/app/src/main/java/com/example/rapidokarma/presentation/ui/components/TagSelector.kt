@@ -1,6 +1,12 @@
 package com.example.rapidokarma.presentation.ui.components
 
-import androidx.compose.foundation.layout.*
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -11,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.example.rapidokarma.presentation.ui.theme.RapidoBlack
 import com.example.rapidokarma.presentation.ui.theme.RapidoYellow
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun TagSelector(selectedTag: String, onTagSelected: (String) -> Unit) {
     val tags = listOf(
@@ -24,14 +30,14 @@ fun TagSelector(selectedTag: String, onTagSelected: (String) -> Unit) {
     )
 
     Column(modifier = Modifier.fillMaxWidth()) {
-        Text(
-            "What went well?",
-            style = MaterialTheme.typography.headlineSmall.copy(
-                fontWeight = FontWeight.Bold,
-                color = RapidoBlack
-            ),
-            modifier = Modifier.padding(bottom = 12.dp)
-        )
+//        Text(
+//            "What went well?",
+//            style = MaterialTheme.typography.headlineSmall.copy(
+//                fontWeight = FontWeight.Bold,
+//                color = RapidoBlack
+//            ),
+//            modifier = Modifier.padding(bottom = 12.dp)
+//        )
 
         FlowRow(
             modifier = Modifier.fillMaxWidth(),

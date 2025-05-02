@@ -34,6 +34,8 @@ class FeedbackViewModel(
             FeedbackEvent.SubmitFeedback -> {
                 submitFeedback()
             }
+
+            is FeedbackEvent.TipAmountChanged -> {}
         }
     }
 

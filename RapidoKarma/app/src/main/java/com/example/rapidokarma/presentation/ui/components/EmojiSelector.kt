@@ -37,15 +37,15 @@ fun EmojiSelector(selectedEmoji: String = "😐", onEmojiSelected: (String) -> U
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
-            "How was your ride?",
-            style = MaterialTheme.typography.headlineSmall.copy(
-                fontWeight = FontWeight.Bold,
-                color = RapidoBlack
-            ),
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
+//        Text(
+//            "How was your ride?",
+//            style = MaterialTheme.typography.headlineSmall.copy(
+//                fontWeight = FontWeight.Bold,
+//                color = RapidoBlack
+//            ),
+//            textAlign = TextAlign.Center,
+//            modifier = Modifier.padding(bottom = 16.dp)
+//        )
 
         Row(
             modifier = Modifier.fillMaxWidth(),
