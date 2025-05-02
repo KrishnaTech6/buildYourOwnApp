@@ -13,11 +13,9 @@ A modern Android application that enables users to submit feedback for drivers i
 ## Features
 
 - Submit feedback for a driver, including text and rating
-- Sentiment tagging (Positive, Negative, Neutral) based on content
+- User can tip the driver
 - Offline-first support using Room database
-- Feedback history screen with all stored entries
-- Swipe-to-delete with Undo via Snackbar
-- Thank You screen with Lottie animation for better UX
+- Thank You screen with Confetti animation for better UX
 - Built with Jetpack Compose and Material Design 3
 
 ## Architecture
@@ -27,6 +25,12 @@ This project follows **Clean Architecture** with the following structure:
 - **Data Layer**: Room database, DAO, and repository implementations
 - **Domain Layer**: Use cases encapsulating business logic
 - **Presentation Layer**: Jetpack Compose UI, ViewModels, and state management using MVI
+
+### Screen Recording
+https://drive.google.com/file/d/1FNXmeKktvRY9IvBmmEIYLHcw33CyH5uN/view?usp=sharing
+
+### Download the APK
+https://drive.google.com/file/d/1-jnmAULSLxxwBThValv70xZaFFWYZICD/view?usp=sharing
 
 ### Tech Stack
 
