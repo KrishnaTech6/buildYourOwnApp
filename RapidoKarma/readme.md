@@ -10,6 +10,13 @@ This app aims to solve that gap by allowing riders to submit detailed, sentiment
 
 A modern Android application that enables users to submit feedback for drivers in an offline-first design. Built to demonstrate clean architecture, modern Android tools, and robust offline persistence using Room.
 
+### Screen Recording
+https://drive.google.com/file/d/1FNXmeKktvRY9IvBmmEIYLHcw33CyH5uN/view?usp=sharing
+
+### Download the APK
+https://drive.google.com/file/d/1-jnmAULSLxxwBThValv70xZaFFWYZICD/view?usp=sharing
+
+
 ## Features
 
 - Submit feedback for a driver, including text and rating
@@ -25,12 +32,6 @@ This project follows **Clean Architecture** with the following structure:
 - **Data Layer**: Room database, DAO, and repository implementations
 - **Domain Layer**: Use cases encapsulating business logic
 - **Presentation Layer**: Jetpack Compose UI, ViewModels, and state management using MVI
-
-### Screen Recording
-https://drive.google.com/file/d/1FNXmeKktvRY9IvBmmEIYLHcw33CyH5uN/view?usp=sharing
-
-### Download the APK
-https://drive.google.com/file/d/1-jnmAULSLxxwBThValv70xZaFFWYZICD/view?usp=sharing
 
 ### Tech Stack
 
