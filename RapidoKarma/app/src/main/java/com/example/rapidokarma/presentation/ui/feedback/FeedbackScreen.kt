@@ -1,8 +1,10 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
-package com.example.rapidokarma.presentation.ui
+package com.example.rapidokarma.presentation.ui.feedback
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -10,9 +12,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.rapidokarma.presentation.event.FeedbackEvent
@@ -23,36 +28,61 @@ import com.example.rapidokarma.presentation.ui.theme.RapidoBlack
 import com.example.rapidokarma.presentation.ui.theme.RapidoGray
 import com.example.rapidokarma.presentation.ui.theme.RapidoYellow
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview(showBackground = true)
 fun FeedbackScreen(
     modifier: Modifier = Modifier,
     state: FeedbackState = remember { FeedbackState() },
-    onEvent: (FeedbackEvent) -> Unit ={},
+    onEvent: (FeedbackEvent) -> Unit = {},
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(state.isSuccess, state.errorMessage) {
         if (state.isSuccess) {
-           snackbarHostState.showSnackbar("Thank you for your feedback!")
+            snackbarHostState.showSnackbar("Thank you for your feedback!")
         } else if (state.errorMessage != null) {
             snackbarHostState.showSnackbar(state.errorMessage)
         }
     }
 
     Scaffold(
-        snackbarHost = { SnackbarHost(snackbarHostState)},
+        snackbarHost = { 
+            SnackbarHost(snackbarHostState) { data ->
+                Snackbar(
+                    modifier = Modifier.padding(16.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    containerColor = RapidoBlack,
+                    contentColor = RapidoYellow,
+                    action = {
+                        TextButton(
+                            onClick = { data.dismiss() },
+                            colors = ButtonDefaults.textButtonColors(contentColor = RapidoYellow)
+                        ) {
+                            Text("Dismiss")
+                        }
+                    }
+                ) {
+                    Text(data.visuals.message)
+                }
+            }
+        },
         topBar = {
             TopAppBar(
                 title = { 
-                    Text(
-                        "Rate Your Ride",
-                        style = MaterialTheme.typography.headlineMedium.copy(
-                            fontWeight = FontWeight.Bold
+                    Column {
+                        Text(
+                            "Rate Your Ride",
+                            style = MaterialTheme.typography.headlineMedium.copy(
+                                fontWeight = FontWeight.Bold
+                            )
                         )
-                    )
+                        Text(
+                            "Help us improve our service",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = RapidoBlack.copy(alpha = 0.7f)
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = RapidoYellow,
@@ -72,33 +102,64 @@ fun FeedbackScreen(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             Card(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(16.dp)),
                 shape = RoundedCornerShape(16.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 2.dp,
+                    pressedElevation = 4.dp
+                )
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(24.dp),
                     verticalArrangement = Arrangement.spacedBy(24.dp)
                 ) {
+                    Text(
+                        "How was your ride?",
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontWeight = FontWeight.Medium
+                        ),
+                        color = RapidoBlack
+                    )
+
                     EmojiSelector(state.emoji) { onEvent(FeedbackEvent.EmojiChanged(it)) }
 
-                    HorizontalDivider()
+                    HorizontalDivider(
+                        modifier = Modifier.padding(vertical = 8.dp),
+                        color = RapidoGray
+                    )
+
+                    Text(
+                        "What could be improved?",
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontWeight = FontWeight.Medium
+                        ),
+                        color = RapidoBlack
+                    )
 
                     TagSelector(state.tag) { onEvent(FeedbackEvent.TagChanged(it)) }
 
-                    AnimatedVisibility(visible = state.emoji.isNotEmpty() || state.tag.isNotEmpty()) {
+                    AnimatedVisibility(
+                        visible = state.emoji.isNotEmpty() || state.tag.isNotEmpty(),
+                        enter = fadeIn() + slideInVertically(),
+                        exit = fadeOut() + slideOutVertically()
+                    ) {
                         OutlinedTextField(
                             value = state.comment,
                             onValueChange = { onEvent(FeedbackEvent.CommentChanged(it)) },
                             label = { Text("Tell us more about your experience (optional)") },
                             modifier = Modifier.fillMaxWidth(),
-                            maxLines = 3,
+                            minLines = 3,
+                            maxLines = 5,
                             shape = RoundedCornerShape(12.dp),
                             colors = OutlinedTextFieldDefaults.colors(
                                 focusedBorderColor = RapidoYellow,
-                                unfocusedBorderColor = Color.LightGray
+                                unfocusedBorderColor = Color.LightGray,
+                                focusedLabelColor = RapidoBlack,
+                                unfocusedLabelColor = RapidoBlack.copy(alpha = 0.6f)
                             )
                         )
                     }
@@ -114,7 +175,13 @@ fun FeedbackScreen(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = RapidoYellow,
                     contentColor = RapidoBlack,
-                    disabledContainerColor = Color.LightGray
+                    disabledContainerColor = RapidoGray,
+                    disabledContentColor = RapidoBlack.copy(alpha = 0.3f)
+                ),
+                elevation = ButtonDefaults.buttonElevation(
+                    defaultElevation = 2.dp,
+                    pressedElevation = 4.dp,
+                    disabledElevation = 0.dp
                 ),
                 shape = RoundedCornerShape(12.dp)
             ) {
@@ -127,9 +194,10 @@ fun FeedbackScreen(
                 } else {
                     Text(
                         "Submit Feedback",
-                        style = MaterialTheme.typography.bodyLarge.copy(
+                        style = MaterialTheme.typography.titleMedium.copy(
                             fontWeight = FontWeight.Bold
-                        )
+                        ),
+                        textAlign = TextAlign.Center
                     )
                 }
             }

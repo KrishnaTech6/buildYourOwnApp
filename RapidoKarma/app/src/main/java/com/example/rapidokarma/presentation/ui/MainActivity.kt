@@ -7,6 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.rapidokarma.presentation.ui.feedback.FeedbackRoute
+import com.example.rapidokarma.presentation.ui.thankyou.ThankYouScreen
 import com.example.rapidokarma.presentation.ui.theme.RapidoKarmaTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,7 +23,20 @@ class MainActivity : ComponentActivity() {
                     startDestination = "feedback"
                 ) {
                     composable("feedback") {
-                        FeedbackRoute()
+                        FeedbackRoute(
+                            onFeedbackSubmitted = {
+                                navController.navigate("thankyou")
+                            }
+                        )
+                    }
+                    composable("thankyou") {
+                        ThankYouScreen(
+                            onTimeout = {
+                                navController.navigate("feedback") {
+                                    popUpTo("feedback") { inclusive = true }
+                                }
+                            }
+                        )
                     }
                 }
             }
